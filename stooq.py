@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-current_positions = pd.read_csv("Individual-Positions-2024-06-20-160845.csv")
-current_positions = pd.read_csv("Individual-Positions-2024-06-20-160845.csv")
+# current_positions = pd.read_csv("Individual-Positions-2024-06-20-160845.csv")
+current_positions = pd.read_csv("dummy_positions.csv")
 current_positions['symbol']
 current_positions['quantity']
 current_positions['cost_basis']
@@ -54,7 +54,7 @@ def build_portfolio_history(positions_df, prices):
 
 
 # Example: only first 3 positions
-subset = current_positions.iloc[0:3]
+subset = current_positions
 prices = fetch_many_stooq(subset["symbol"])
 portfolio = build_portfolio_history(subset, prices)
 
@@ -128,14 +128,14 @@ def add_current_performance(positions_df, prices):
     return df
 
 
-subset_perf = add_current_performance(subset, prices)
+subset_perf = add_current_performance(current_positions, prices)
 subset_sorted = subset_perf.sort_values("price_diff", ascending=False)
 subset_sorted = subset_perf.sort_values("total_gain", ascending=False)
 
 prices = fetch_many_stooq(subset_sorted["symbol"])
 filtered_prices = prices.loc["2010-01-01":]
 subset_sorted = subset_sorted[(subset_sorted['symbol'] != 'BYDDY') & (subset_sorted['symbol'] != 'VWAGY')]
-plot_price_vs_cost_grid(subset_sorted, filtered_prices, ncols=10)
+plot_price_vs_cost_grid(subset_sorted, filtered_prices, ncols=3)
 
 
 
