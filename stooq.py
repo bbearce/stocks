@@ -4,9 +4,18 @@ import matplotlib.pyplot as plt
 
 # current_positions = pd.read_csv("Individual-Positions-2024-06-20-160845.csv")
 current_positions = pd.read_csv("dummy_positions.csv")
-current_positions['symbol']
-current_positions['quantity']
-current_positions['cost_basis']
+gics_sector_s_and_p = pd.read_csv("gics_sector_s_and_p.csv")
+
+cp_sym = set(current_positions['symbol'])
+gics_sym = set(gics_sector_s_and_p['Symbol'])
+
+cp_sym - gics_sym
+
+gics_sector_s_and_p[gics_sector_s_and_p['Symbol'].isin(current_positions['symbol'])]
+
+
+
+
 
 
 def fetch_stooq(ticker):
@@ -51,12 +60,11 @@ def build_portfolio_history(positions_df, prices):
     portfolio["Total"] = portfolio.sum(axis=1)
     return portfolio
 
-
-
 # Example: only first 3 positions
-subset = current_positions
+subset = current_positions.iloc[0:3]
 prices = fetch_many_stooq(subset["symbol"])
 portfolio = build_portfolio_history(subset, prices)
+
 
 
 def plot_price_vs_cost_grid(positions_df, prices, ncols=3):
