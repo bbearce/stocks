@@ -111,7 +111,9 @@ def plot_price_vs_cost_grid(positions_df, prices, ncols=3):
     for j in range(i + 1, len(axes)):
         fig.delaxes(axes[j])
     plt.tight_layout()
+    plt.savefig("plot.png")
     plt.show()
+
 
 def add_current_performance(positions_df, prices):
     df = positions_df.copy()
