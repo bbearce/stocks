@@ -1,1 +1,3 @@
 *.csv
+schwab_tokens.json
+.env

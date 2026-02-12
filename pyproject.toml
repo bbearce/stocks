@@ -11,6 +11,7 @@ pandas = "^2.2.2"
 yfinance = "^0.2.40"
 seaborn = "^0.13.2"
 matplotlib = "^3.9.0"
+dotenv = "^0.9.9"
 
 
 [build-system]
